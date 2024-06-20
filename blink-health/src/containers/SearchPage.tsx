@@ -14,6 +14,7 @@ export const SearchPage = () => {
     queryFn: () => getDrugs(drugName),
     enabled: !!drugName,
   });
+
   const handleOnChange = (drugName: string): void => {
     setDrugName(drugName);
     fetchDrugsQuery.refetch();
@@ -28,12 +29,21 @@ export const SearchPage = () => {
       return drug?.name;
     });
 
+  console.log('drugs', drugs);
+
   return (
     <div className={styles.searchPage}>
       <Header title="Drug Search" />
       <div className={styles.searchBarWrapper}>
         <div className={styles.label}>Search For Drugs!</div>
         <SearchBar handleOnChange={handleOnChange} drugs={drugs} />
+        {drugName &&
+          !fetchDrugsQuery?.data?.drugGroup?.conceptGroup &&
+          !fetchDrugsQuery.isLoading && (
+            <div className={styles.searchError}>
+              Your search term returned no results. Please try again
+            </div>
+          )}
       </div>
     </div>
   );

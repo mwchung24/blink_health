@@ -27,8 +27,10 @@ export const SearchBar = ({
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
       handleOnChange(drugName);
-      // @ts-ignore - Property 'show' does not exist on type 'never'.
-      ref?.current?.show();
+      if (drugs) {
+        // @ts-ignore - Property 'show' does not exist on type 'never'.
+        ref?.current?.show();
+      }
     }
   };
 
@@ -50,8 +52,12 @@ export const SearchBar = ({
         suggestions={drugs}
         completeMethod={() => {}}
         ref={ref}
-        // @ts-ignore - Property 'show' does not exist on type 'never'.
-        onFocus={() => ref?.current?.show()}
+        onFocus={() => {
+          if (drugs) {
+            // @ts-ignore - Property 'show' does not exist on type 'never'.
+            ref?.current?.show();
+          }
+        }}
         onSelect={handleSelect}
       />
       <Button
