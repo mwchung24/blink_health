@@ -1,0 +1,11 @@
+.autocompleteInput {
+  width: 400px;
+}
+
+.autocompletePanel {
+  width: 400px;
+}
+
+.autocompletePanel li {
+  text-wrap: wrap;
+}
