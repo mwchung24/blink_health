@@ -1,0 +1,11 @@
+.searchBarWrapper {
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
