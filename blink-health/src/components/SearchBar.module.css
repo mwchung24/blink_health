@@ -1,5 +1,7 @@
 .autocompleteInput {
   width: 400px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .autocompletePanel {
@@ -8,4 +10,9 @@
 
 .autocompletePanel li {
   text-wrap: wrap;
+}
+
+.button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }

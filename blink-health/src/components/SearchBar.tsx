@@ -59,6 +59,7 @@ export const SearchBar = ({
         onSelect={handleSelect}
       />
       <Button
+        className={styles.button}
         icon="pi pi-search"
         aria-label="search"
         onClick={() => {
