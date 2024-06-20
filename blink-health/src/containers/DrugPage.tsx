@@ -10,9 +10,6 @@ export const DrugPage = () => {
   let {drugName} = useParams();
   const location = useLocation();
 
-  console.log('drugName', drugName);
-  console.log('location', location.state);
-
   const fetchDrugsQuery = useQuery({
     queryKey: ['drug' + drugName],
     queryFn: () => getDrugs(drugName || ''),
@@ -25,18 +22,14 @@ export const DrugPage = () => {
     })
     ?.flat()
     .filter((drug: TDrug) => {
-      return drug.name === location.state.name;
+      return drug?.name === location.state.name;
     })[0];
-
-  console.log('drug', drug);
 
   const fetchNDCs = useQuery({
     queryKey: ['ndcs' + drug?.rxcui],
     queryFn: () => getNDCs(drug?.rxcui),
     enabled: !!drug?.rxcui,
   });
-
-  console.log('fetchNDCs', fetchNDCs);
 
   return (
     <div>

@@ -1,19 +1,36 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {SearchBar} from '../components/SearchBar';
-import {getDrugs} from '../data-provider/data-service';
+import {getDrugs, getSpellingSuggestions} from '../data-provider/data-service';
 import {TDrug} from '../utils/types';
 import {Header} from '../components/Header';
 import styles from './SearchPage.module.css';
 
 export const SearchPage = () => {
   const [drugName, setDrugName] = useState<string>('');
+  const [suggestion, setSuggestion] = useState<string>('');
 
   const fetchDrugsQuery = useQuery({
     queryKey: ['drug' + drugName],
     queryFn: () => getDrugs(drugName),
     enabled: !!drugName,
   });
+
+  const fetchSuggestions = useQuery({
+    queryKey: ['suggestions' + drugName],
+    queryFn: () => getSpellingSuggestions(drugName),
+    enabled: !!drugName,
+  });
+
+  useEffect(() => {
+    if (
+      !fetchDrugsQuery?.data?.drugGroup?.conceptGroup &&
+      fetchSuggestions?.data?.suggestionGroup?.suggestionList.suggestion
+    ) {
+      setDrugName(fetchSuggestions?.data?.suggestionGroup?.suggestionList.suggestion[0]);
+      fetchDrugsQuery.refetch();
+    }
+  }, [fetchSuggestions?.data?.suggestionGroup?.suggestionList.suggestion]);
 
   const handleOnChange = (drugName: string): void => {
     setDrugName(drugName);
@@ -25,11 +42,10 @@ export const SearchPage = () => {
       return drugGroup?.conceptProperties;
     })
     ?.flat()
-    .map((drug: TDrug) => {
+    ?.map((drug: TDrug) => {
       return drug?.name;
-    });
-
-  console.log('drugs', drugs);
+    })
+    .filter((drug: string) => drug);
 
   return (
     <div className={styles.searchPage}>

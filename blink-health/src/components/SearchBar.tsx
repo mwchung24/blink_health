@@ -35,8 +35,6 @@ export const SearchBar = ({
   };
 
   const handleSelect = (e: AutoCompleteSelectEvent) => {
-    console.log('onSelect', drugName);
-    console.log('onSelect', e);
     // @ts-ignore
     navigate(`/drugs/${drugName}`, {state: {name: e.value}});
   };

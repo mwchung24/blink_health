@@ -5,7 +5,7 @@ export const AssociatedNDCs = ({ndcs}: {ndcs: string[]}) => {
     <div className={styles.NDCs}>
       <span className={styles.associated}>Associated NDCs</span>
       <ul>
-        {ndcs.map((ndc: string) => {
+        {ndcs?.map((ndc: string) => {
           return <li key={ndc}>{ndc}</li>;
         })}
       </ul>
