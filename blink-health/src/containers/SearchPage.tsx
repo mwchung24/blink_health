@@ -52,7 +52,7 @@ export const SearchPage = () => {
       <Header title="Drug Search" />
       <div className={styles.searchBarWrapper}>
         <div className={styles.label}>Search For Drugs!</div>
-        <SearchBar handleOnChange={handleOnChange} drugs={drugs} />
+        <SearchBar handleOnChange={handleOnChange} drugs={drugs} name={drugName} />
         {drugName &&
           !fetchDrugsQuery?.data?.drugGroup?.conceptGroup &&
           !fetchDrugsQuery.isLoading && (

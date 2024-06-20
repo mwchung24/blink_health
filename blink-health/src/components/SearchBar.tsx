@@ -11,9 +11,11 @@ import styles from './SearchBar.module.css';
 export const SearchBar = ({
   handleOnChange,
   drugs,
+  name,
 }: {
   handleOnChange: (drugName: string) => void;
   drugs: any[];
+  name: string;
 }) => {
   const [drugName, setDrugName] = useState<string>('');
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ export const SearchBar = ({
 
   const handleSelect = (e: AutoCompleteSelectEvent) => {
     // @ts-ignore
-    navigate(`/drugs/${drugName}`, {state: {name: e.value}});
+    navigate(`/drugs/${name}`, {state: {name: e.value}});
   };
 
   return (
