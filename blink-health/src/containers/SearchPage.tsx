@@ -8,7 +8,6 @@ import styles from './SearchPage.module.css';
 
 export const SearchPage = () => {
   const [drugName, setDrugName] = useState<string>('');
-  const [suggestion, setSuggestion] = useState<string>('');
 
   const fetchDrugsQuery = useQuery({
     queryKey: ['drug' + drugName],
