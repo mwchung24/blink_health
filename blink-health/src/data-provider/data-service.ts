@@ -13,3 +13,9 @@ export const getSpellingSuggestions = async (search: string) => {
 
   return response.data;
 };
+
+export const getNDCs = async (id: string) => {
+  const response = await axios.get(`https://rxnav.nlm.nih.gov/REST/rxcui/${id}/ndcs.json`);
+
+  return response.data;
+};
